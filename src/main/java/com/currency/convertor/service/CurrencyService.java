@@ -16,12 +16,10 @@ public class CurrencyService {
     private final CurrencyRepository currencyRepository;
     private final CurrencyApiClient currencyApiClient;
 
-
     public CurrencyService(CurrencyRepository currencyRepository, CurrencyApiClient currencyApiClient) {
         this.currencyRepository = currencyRepository;
         this.currencyApiClient = currencyApiClient;
     }
-
 
     public BigDecimal convert(CurrencyRequestModel model) {
         CurrencyToDay currencyFrom = this.currencyRepository.findByNameOfValue(model.getExchangeFrom());
