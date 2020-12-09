@@ -7,14 +7,13 @@ import com.currency.convertor.repository.CurrencyApiClient;
 import com.currency.convertor.repository.CurrencyRepository;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
-import java.util.Map;
 
 @Service
 public class CurrencyService {
 
     private final CurrencyRepository currencyRepository;
-
     private final CurrencyApiClient currencyApiClient;
 
 
@@ -24,30 +23,23 @@ public class CurrencyService {
     }
 
 
-    public String convert(CurrencyRequestModel model) {
-        ResponseCurrencyModel receive = this.currencyApiClient.getLatest();
-        for (Map.Entry<String, BigDecimal> entry : receive.getRates().entrySet()) {
-            CurrencyToDay currencyToDay = new CurrencyToDay();
-            currencyToDay.setNameOfValue(entry.getKey());
-            currencyToDay.setRate(entry.getValue());
-            currencyToDay.setRefreshTime(receive.getDate());
-            this.currencyRepository.saveAndFlush(currencyToDay);
-        }
-
-
+    public BigDecimal convert(CurrencyRequestModel model) {
         CurrencyToDay currencyFrom = this.currencyRepository.findByNameOfValue(model.getExchangeFrom());
         CurrencyToDay currencyTo = this.currencyRepository.findByNameOfValue(model.getExchangeTo());
-
-        return "ee";
+        double result = (currencyFrom.getRate().doubleValue() * model.getSumExchange().doubleValue()) * currencyTo.getRate().doubleValue();
+        return BigDecimal.valueOf(result);
     }
 
-    private void saveToDb() {
-
+    @PostConstruct
+    public void save(){
+        ResponseCurrencyModel receive = this.currencyApiClient.getLatest();
+        receive.getRates().forEach((key, value) -> {
+            CurrencyToDay currencyToDay = new CurrencyToDay();
+            currencyToDay.setNameOfValue(key);
+            currencyToDay.setRate(value);
+            currencyToDay.setRefreshTime(receive.getDate());
+            this.currencyRepository.saveAndFlush(currencyToDay);
+        });
     }
-
-//    private ResponseCurrencyModel receiveData() {
-//        return
-//    }
-
 
 }
