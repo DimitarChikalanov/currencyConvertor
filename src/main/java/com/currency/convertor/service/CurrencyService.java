@@ -24,7 +24,7 @@ public class CurrencyService {
     public BigDecimal convert(CurrencyRequestModel model) {
         CurrencyToDay currencyFrom = this.currencyRepository.findByNameOfValue(model.getExchangeFrom());
         CurrencyToDay currencyTo = this.currencyRepository.findByNameOfValue(model.getExchangeTo());
-        double result = (currencyFrom.getRate().doubleValue() * model.getSumExchange().doubleValue()) * currencyTo.getRate().doubleValue();
+        double result = model.getSumExchange().doubleValue()*(currencyFrom.getRate().doubleValue()*currencyTo.getRate().doubleValue());
         return BigDecimal.valueOf(result);
     }
 
