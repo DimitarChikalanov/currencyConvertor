@@ -5,6 +5,7 @@ import com.currency.convertor.service.CurrencyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,7 +18,7 @@ public class Controller {
     }
 
     @PostMapping("/us")
-    public ResponseEntity<?> sent (CurrencyRequestModel model){
+    public ResponseEntity<?> sent (@RequestBody CurrencyRequestModel model){
         return new ResponseEntity<>(currencyService.convert(model), HttpStatus.ACCEPTED);
     }
 }
