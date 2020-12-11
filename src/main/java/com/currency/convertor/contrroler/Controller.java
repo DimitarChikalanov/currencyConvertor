@@ -4,9 +4,9 @@ import com.currency.convertor.domain.model.CurrencyRequestModel;
 import com.currency.convertor.service.CurrencyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 public class Controller {
@@ -18,7 +18,12 @@ public class Controller {
     }
 
     @PostMapping("/change")
-    public ResponseEntity<?> changeCurrency (@RequestBody CurrencyRequestModel model){
+    public ResponseEntity<?> changeCurrency(@RequestBody CurrencyRequestModel model) {
         return new ResponseEntity<>(currencyService.convert(model), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/get_currency")
+    public Map getCurrency(@RequestParam String currencyName) {
+        return this.currencyService.getCurrencyRate(currencyName);
     }
 }
