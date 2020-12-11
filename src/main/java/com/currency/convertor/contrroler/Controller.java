@@ -17,8 +17,8 @@ public class Controller {
         this.currencyService = currencyService;
     }
 
-    @PostMapping("/us")
-    public ResponseEntity<?> sent (@RequestBody CurrencyRequestModel model){
+    @PostMapping("/change")
+    public ResponseEntity<?> changeCurrency (@RequestBody CurrencyRequestModel model){
         return new ResponseEntity<>(currencyService.convert(model), HttpStatus.ACCEPTED);
     }
 }

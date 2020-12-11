@@ -12,6 +12,7 @@ public class CurrencyToDay {
     @Id
     private Long id;
 
+
     private String nameOfValue;
 
     private BigDecimal rate;
