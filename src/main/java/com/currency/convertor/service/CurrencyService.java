@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
+<<<<<<< HEAD
+=======
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.HashMap;
+>>>>>>> 908d69203c81c9e00dfdbd82cb6c9147aea765a0
 import java.util.List;
 
 @Service
@@ -25,8 +31,10 @@ public class CurrencyService {
     public BigDecimal convert(CurrencyRequestModel model) {
         CurrencyToDay currencyFrom = this.currencyRepository.findByNameOfValue(model.getExchangeFrom());
         CurrencyToDay currencyTo = this.currencyRepository.findByNameOfValue(model.getExchangeTo());
-        double result = model.getSumExchange().doubleValue() * (currencyFrom.getRate().doubleValue() * currencyTo.getRate().doubleValue());
-        return BigDecimal.valueOf(result);
+        BigDecimal exchangeResult = (currencyTo.getRate().divide(currencyFrom.getRate(), 8, RoundingMode.HALF_UP)
+                .multiply(model.getSumExchange()));
+
+        return exchangeResult;
     }
 
     public List getCurrencyRate() {
