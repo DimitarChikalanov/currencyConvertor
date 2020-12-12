@@ -1,19 +1,19 @@
-package com.currency.convertor.contrroler;
+package com.currency.convertor.controllers;
 
 import com.currency.convertor.domain.model.CurrencyRequestModel;
 import com.currency.convertor.service.CurrencyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class Controller {
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/v1/")
+public class CurrencyConverterController {
 
     private final CurrencyService currencyService;
 
-    public Controller(CurrencyService currencyService) {
+    public CurrencyConverterController(CurrencyService currencyService) {
         this.currencyService = currencyService;
     }
 

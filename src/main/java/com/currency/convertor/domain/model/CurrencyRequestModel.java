@@ -10,8 +10,7 @@ public class CurrencyRequestModel {
 
     private BigDecimal sumExchange;
 
-    public CurrencyRequestModel() {
-    }
+    public CurrencyRequestModel() { }
 
     public String getExchangeFrom() {
         return exchangeFrom;

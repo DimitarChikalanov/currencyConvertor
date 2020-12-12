@@ -12,15 +12,13 @@ public class CurrencyToDay {
     @Id
     private Long id;
 
-
     private String nameOfValue;
 
     private BigDecimal rate;
 
     private LocalDate refreshTime;
 
-    public CurrencyToDay() {
-    }
+    public CurrencyToDay() { }
 
     public Long getId() {
         return id;
