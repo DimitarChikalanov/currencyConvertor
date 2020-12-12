@@ -9,5 +9,4 @@ public interface CurrencyApiClient {
 
     @GetMapping("/latest")
     ResponseCurrencyModel getLatest();
-
 }

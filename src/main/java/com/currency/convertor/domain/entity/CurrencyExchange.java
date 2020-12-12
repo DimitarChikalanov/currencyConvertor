@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "currency_to_dayes")
-public class CurrencyToDay {
+public class CurrencyExchange {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -18,7 +18,7 @@ public class CurrencyToDay {
 
     private LocalDate refreshTime;
 
-    public CurrencyToDay() { }
+    public CurrencyExchange() { }
 
     public Long getId() {
         return id;

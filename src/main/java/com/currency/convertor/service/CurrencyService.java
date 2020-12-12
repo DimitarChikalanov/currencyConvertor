@@ -1,6 +1,6 @@
 package com.currency.convertor.service;
 
-import com.currency.convertor.domain.entity.CurrencyToDay;
+import com.currency.convertor.domain.entity.CurrencyExchange;
 import com.currency.convertor.domain.model.CurrencyRequestModel;
 import com.currency.convertor.domain.model.ResponseCurrencyModel;
 import com.currency.convertor.repository.CurrencyApiClient;
@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.List;
 
 @Service
@@ -26,8 +25,8 @@ public class CurrencyService {
     }
 
     public BigDecimal convert(CurrencyRequestModel model) {
-        CurrencyToDay currencyFrom = this.currencyRepository.findByNameOfValue(model.getExchangeFrom());
-        CurrencyToDay currencyTo = this.currencyRepository.findByNameOfValue(model.getExchangeTo());
+        CurrencyExchange currencyFrom = this.currencyRepository.findByNameOfValue(model.getExchangeFrom());
+        CurrencyExchange currencyTo = this.currencyRepository.findByNameOfValue(model.getExchangeTo());
         double exchangeResult = (currencyTo.getRate().doubleValue() / (currencyFrom.getRate().doubleValue()) * (model.getSumExchange().doubleValue()));
 
         return new BigDecimal(exchangeResult).setScale(2, RoundingMode.HALF_UP);
@@ -41,11 +40,11 @@ public class CurrencyService {
     public void save() {
         ResponseCurrencyModel receive = this.currencyApiClient.getLatest();
         receive.getRates().forEach((key, value) -> {
-            CurrencyToDay currencyToDay = new CurrencyToDay();
-            currencyToDay.setNameOfValue(key);
-            currencyToDay.setRate(value);
-            currencyToDay.setRefreshTime(receive.getDate());
-            this.currencyRepository.saveAndFlush(currencyToDay);
+            CurrencyExchange currencyExchange = new CurrencyExchange();
+            currencyExchange.setNameOfValue(key);
+            currencyExchange.setRate(value);
+            currencyExchange.setRefreshTime(receive.getDate());
+            this.currencyRepository.saveAndFlush(currencyExchange);
         });
     }
 
