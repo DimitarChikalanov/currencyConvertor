@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,11 +32,8 @@ public class CurrencyService {
         return BigDecimal.valueOf(result);
     }
 
-    public Map<String, BigDecimal> getCurrencyRate(String currency) {
-        CurrencyToDay currencyToDay = this.currencyRepository.findByNameOfValue(currency);
-        Map<String, BigDecimal> map = new HashMap<String, BigDecimal>();
-        map.putIfAbsent(currencyToDay.getNameOfValue(), currencyToDay.getRate());
-        return map;
+    public List getCurrencyRate() {
+        return this.currencyRepository.findAll();
     }
 
     @PostConstruct

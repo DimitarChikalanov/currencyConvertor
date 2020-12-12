@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,8 +23,8 @@ public class Controller {
         return new ResponseEntity<>(currencyService.convert(model), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/get_currency")
-    public Map getCurrency(@RequestParam String currencyName) {
-        return this.currencyService.getCurrencyRate(currencyName);
+    @GetMapping("/get_all_currency")
+    public List getCurrency() {
+        return this.currencyService.getCurrencyRate();
     }
 }
