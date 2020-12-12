@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Service
@@ -27,10 +28,9 @@ public class CurrencyService {
     public BigDecimal convert(CurrencyRequestModel model) {
         CurrencyToDay currencyFrom = this.currencyRepository.findByNameOfValue(model.getExchangeFrom());
         CurrencyToDay currencyTo = this.currencyRepository.findByNameOfValue(model.getExchangeTo());
-        BigDecimal exchangeResult = (currencyTo.getRate().divide(currencyFrom.getRate(), 8, RoundingMode.HALF_UP)
-                .multiply(model.getSumExchange()));
+        double exchangeResult = (currencyTo.getRate().doubleValue() / (currencyFrom.getRate().doubleValue()) * (model.getSumExchange().doubleValue()));
 
-        return exchangeResult;
+        return new BigDecimal(exchangeResult).setScale(2, RoundingMode.HALF_UP);
     }
 
     public List getCurrencyRate() {
