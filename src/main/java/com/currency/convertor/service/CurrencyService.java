@@ -9,12 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
-<<<<<<< HEAD
-=======
+
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
->>>>>>> 908d69203c81c9e00dfdbd82cb6c9147aea765a0
 import java.util.List;
 
 @Service
