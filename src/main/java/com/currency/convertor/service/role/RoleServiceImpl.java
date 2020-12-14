@@ -1,10 +1,8 @@
-package com.currency.convertor.service.serviceImpl;
+package com.currency.convertor.service.role;
 
 import com.currency.convertor.domain.entity.Erole;
 import com.currency.convertor.domain.entity.Role;
-import com.currency.convertor.domain.entity.User;
 import com.currency.convertor.repository.RoleRepository;
-import com.currency.convertor.service.RolesService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

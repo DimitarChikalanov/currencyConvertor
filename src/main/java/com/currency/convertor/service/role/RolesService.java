@@ -1,4 +1,4 @@
-package com.currency.convertor.service;
+package com.currency.convertor.service.role;
 
 public interface RolesService {
 
