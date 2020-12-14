@@ -24,6 +24,7 @@ public class User extends BaseEntity {
 
     public User() {
         this.createUser = LocalDateTime.now();
+
     }
 
     public String getUsername() {
