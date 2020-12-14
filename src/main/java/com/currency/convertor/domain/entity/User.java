@@ -22,6 +22,7 @@ public class User extends BaseEntity {
 
     private LocalDateTime createUser;
 
+
     public User() {
         this.createUser = LocalDateTime.now();
 
@@ -70,4 +71,6 @@ public class User extends BaseEntity {
     public void setCreateUser(LocalDateTime createUser) {
         this.createUser = createUser;
     }
+
+
 }
