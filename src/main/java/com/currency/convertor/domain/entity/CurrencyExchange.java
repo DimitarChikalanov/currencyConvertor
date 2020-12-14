@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "currency_to_dayes")
-public class CurrencyExchange  extends BaseEntity{
+public class CurrencyExchange extends BaseEntity{
 
     private String nameOfValue;
 

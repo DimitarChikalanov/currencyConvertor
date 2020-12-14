@@ -1,6 +1,8 @@
 package com.currency.convertor.domain.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,33 +20,58 @@ public class History extends BaseEntity {
 
     private LocalDateTime exchangedAt;
 
+    @ManyToOne
+    private User user ;
+
     public  History () {
         this.exchangedAt=LocalDateTime.now();
     }
 
-    public String GetCurrencyFrom() {return currencyFrom; }
-
-    public void setCurrencyFrom(String currencyFrom) { this.currencyFrom = currencyFrom; }
-
-    public String GetCurrencyTo() {return currencyTo; }
-
-    public void setCurrencyTo(String currencyTo) { this.currencyTo = currencyTo; }
-
-    public BigDecimal GetCurrencyExchange() { return currencyExchange; }
-
-    public void GetExchangeSum(BigDecimal ExchangeSum) {
-        this.ExchangeSum = ExchangeSum;
+    public String getCurrencyFrom() {
+        return currencyFrom;
     }
 
-    public BigDecimal SetExchangeSum() { return ExchangeSum; }
+    public void setCurrencyFrom(String currencyFrom) {
+        this.currencyFrom = currencyFrom;
+    }
 
-    public void SetCurrencyExchange(BigDecimal currencyExchange) {
+    public String getCurrencyTo() {
+        return currencyTo;
+    }
+
+    public void setCurrencyTo(String currencyTo) {
+        this.currencyTo = currencyTo;
+    }
+
+    public BigDecimal getCurrencyExchange() {
+        return currencyExchange;
+    }
+
+    public void setCurrencyExchange(BigDecimal currencyExchange) {
         this.currencyExchange = currencyExchange;
     }
 
-    public LocalDateTime GetExchangedAt() {
+    public BigDecimal getExchangeSum() {
+        return ExchangeSum;
+    }
+
+    public void setExchangeSum(BigDecimal exchangeSum) {
+        ExchangeSum = exchangeSum;
+    }
+
+    public LocalDateTime getExchangedAt() {
         return exchangedAt;
     }
 
-    public void SetExchangedAt(LocalDateTime exchangedAt) { this.exchangedAt = exchangedAt; }
+    public void setExchangedAt(LocalDateTime exchangedAt) {
+        this.exchangedAt = exchangedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

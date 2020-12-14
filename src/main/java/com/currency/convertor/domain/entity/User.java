@@ -2,8 +2,10 @@ package com.currency.convertor.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -22,6 +24,8 @@ public class User extends BaseEntity {
 
     private LocalDateTime createUser;
 
+    @ManyToMany
+    private Set<Role> roles;
 
     public User() {
         this.createUser = LocalDateTime.now();
@@ -68,9 +72,19 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
+    public LocalDateTime getCreateUser() {
+        return createUser;
+    }
+
     public void setCreateUser(LocalDateTime createUser) {
         this.createUser = createUser;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }

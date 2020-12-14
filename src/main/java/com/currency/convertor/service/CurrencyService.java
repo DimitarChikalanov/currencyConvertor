@@ -38,15 +38,15 @@ public class CurrencyService {
     }
 
     @PostConstruct
-    @Scheduled(cron = "0 0 05 * * ?")
+  //  @Scheduled(cron = "0 0 05 * * ?")
     public void save() {
         ResponseCurrencyModel receive = this.currencyApiClient.getLatest();
         receive.getRates().forEach((key, value) -> {
             CurrencyExchange currencyExchange = new CurrencyExchange();
+            this.currencyRepository.delete(currencyExchange);
             currencyExchange.setNameOfValue(key);
             currencyExchange.setRate(value);
             currencyExchange.setRefreshTime(receive.getDate());
-            this.currencyRepository.deleteAll();
             this.currencyRepository.saveAndFlush(currencyExchange);
         });
     }
