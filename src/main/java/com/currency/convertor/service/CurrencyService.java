@@ -5,6 +5,7 @@ import com.currency.convertor.domain.model.CurrencyRequestModel;
 import com.currency.convertor.domain.model.ResponseCurrencyModel;
 import com.currency.convertor.repository.CurrencyApiClient;
 import com.currency.convertor.repository.CurrencyRepository;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -37,6 +38,7 @@ public class CurrencyService {
     }
 
     @PostConstruct
+    @Scheduled(cron = "0 0 17 * * ?")
     public void save() {
         ResponseCurrencyModel receive = this.currencyApiClient.getLatest();
         receive.getRates().forEach((key, value) -> {
