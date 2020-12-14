@@ -46,6 +46,7 @@ public class CurrencyService {
             currencyExchange.setNameOfValue(key);
             currencyExchange.setRate(value);
             currencyExchange.setRefreshTime(receive.getDate());
+            this.currencyRepository.deleteAll();
             this.currencyRepository.saveAndFlush(currencyExchange);
         });
     }
