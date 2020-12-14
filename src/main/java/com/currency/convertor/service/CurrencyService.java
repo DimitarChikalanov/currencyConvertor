@@ -38,7 +38,7 @@ public class CurrencyService {
     }
 
     @PostConstruct
-    @Scheduled(cron = "0 0 17 * * ?")
+    @Scheduled(cron = "0 0 05 * * ?")
     public void save() {
         ResponseCurrencyModel receive = this.currencyApiClient.getLatest();
         receive.getRates().forEach((key, value) -> {
