@@ -11,13 +11,13 @@ public class SignupRequest {
     @Size(min = 3, max = 20)
     private String username;
 
-//    @NotBlank
-//    @Size(min = 3, max = 20)
-//    private String firstName;
-//
-//    @NotBlank
-//    @Size(min = 3, max = 20)
-//    private String lastName;
+    @NotBlank
+    @Size(min = 3, max = 20)
+    private String firstName;
+
+    @NotBlank
+    @Size(min = 3, max = 20)
+    private String lastName;
 
     @NotBlank
     @Size(max = 50)
@@ -38,21 +38,21 @@ public class SignupRequest {
         this.username = username;
     }
 
-//    public String getFirstName() {
-//        return firstName;
-//    }
-//
-//    public void setFirstName(String firstName) {
-//        this.firstName = firstName;
-//    }
-//
-//    public String getLastName() {
-//        return lastName;
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getEmail() {
         return email;

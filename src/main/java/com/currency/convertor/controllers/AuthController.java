@@ -76,8 +76,8 @@ public class AuthController {
 
         User user = new User();
         user.setUsername(model.getUsername());
-//        user.setFirstName(model.getFirstName());
-//        user.setLastName(model.getLastName());
+        user.setFirstName(model.getFirstName());
+        user.setLastName(model.getLastName());
         user.setEmail(model.getEmail());
         user.setPassword(passwordEncoder.encode(model.getPassword()));
 
