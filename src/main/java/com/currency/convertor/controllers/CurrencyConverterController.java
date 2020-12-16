@@ -1,14 +1,18 @@
 package com.currency.convertor.controllers;
 
+import com.currency.convertor.domain.entity.User;
 import com.currency.convertor.domain.model.CurrencyRequestModel;
 import com.currency.convertor.service.currency.CurrencyService;
 import com.currency.convertor.service.currency.CurrencyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -23,8 +27,8 @@ public class CurrencyConverterController {
     }
 
     @PostMapping("/change")
-    public ResponseEntity<?> changeCurrency(@RequestBody CurrencyRequestModel model) {
-        return new ResponseEntity<>(currencyService.convert(model), HttpStatus.ACCEPTED);
+    public ResponseEntity<?> changeCurrency(@RequestBody CurrencyRequestModel model, @AuthenticationPrincipal User user) {
+        return new ResponseEntity<>(currencyService.convert(model,user), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/currencies")

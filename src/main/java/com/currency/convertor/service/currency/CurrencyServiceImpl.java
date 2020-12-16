@@ -1,6 +1,7 @@
 package com.currency.convertor.service.currency;
 
 import com.currency.convertor.domain.entity.CurrencyExchange;
+import com.currency.convertor.domain.entity.User;
 import com.currency.convertor.domain.model.CurrencyRequestModel;
 import com.currency.convertor.domain.model.ResponseCurrencyModel;
 import com.currency.convertor.repository.CurrencyApiClient;
@@ -26,7 +27,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public BigDecimal convert(CurrencyRequestModel model) {
+    public BigDecimal convert(CurrencyRequestModel model, User user) {
         CurrencyExchange currencyFrom = this.currencyRepository.findByNameOfValue(model.getExchangeFrom());
         CurrencyExchange currencyTo = this.currencyRepository.findByNameOfValue(model.getExchangeTo());
         double exchangeResult = (currencyTo.getRate().doubleValue() / (currencyFrom.getRate().doubleValue()) * (model.getSumExchange().doubleValue()));
