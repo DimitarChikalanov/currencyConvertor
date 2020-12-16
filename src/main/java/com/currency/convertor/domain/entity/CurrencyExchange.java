@@ -6,11 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "currency_to_dayes")
-public class CurrencyExchange {
-
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Id
-    private Long id;
+public class CurrencyExchange  extends BaseEntity{
 
     private String nameOfValue;
 
@@ -19,14 +15,6 @@ public class CurrencyExchange {
     private LocalDate refreshTime;
 
     public CurrencyExchange() { }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNameOfValue() {
         return nameOfValue;
