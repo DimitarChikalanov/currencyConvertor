@@ -39,13 +39,14 @@ public class CurrencyService {
     @PostConstruct
     public void save() {
         ResponseCurrencyModel receive = this.currencyApiClient.getLatest();
+
         receive.getRates().forEach((key, value) -> {
             CurrencyExchange currencyExchange = new CurrencyExchange();
             currencyExchange.setNameOfValue(key);
             currencyExchange.setRate(value);
             currencyExchange.setRefreshTime(receive.getDate());
+
             this.currencyRepository.saveAndFlush(currencyExchange);
         });
     }
-
 }
