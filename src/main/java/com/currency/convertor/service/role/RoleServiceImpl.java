@@ -1,6 +1,6 @@
 package com.currency.convertor.service.role;
 
-import com.currency.convertor.domain.entity.Erole;
+import com.currency.convertor.domain.entity.ERole;
 import com.currency.convertor.domain.entity.Role;
 import com.currency.convertor.repository.RoleRepository;
 import org.springframework.stereotype.Service;
@@ -22,14 +22,14 @@ public class RoleServiceImpl implements RolesService {
     @Override
     @PostConstruct
     public void saveToDb() {
-       List<Erole> roles = new ArrayList<>();
+       List<ERole> roles = new ArrayList<>();
         if (this.roleRepository.count() == 0) {
-            roles.add(Erole.ROLE_ADMIN);
-            roles.add(Erole.ROLE_USER);
+            roles.add(ERole.ROLE_ADMIN);
+            roles.add(ERole.ROLE_USER);
             roles.forEach(e -> {
-                Role roleAdmin = new Role();
-                roleAdmin.setErole(e);
-                this.roleRepository.saveAndFlush(roleAdmin);
+                Role role = new Role();
+                role.setName(e);
+                this.roleRepository.saveAndFlush(role);
             });
 
         }

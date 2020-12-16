@@ -1,10 +1,8 @@
 package com.currency.convertor.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,9 +12,9 @@ public class User extends BaseEntity {
     @Column(unique = true)
     private String username;
 
-    private String firstName;
-
-    private String lastName;
+//    private String firstName;
+//
+//    private String lastName;
 
     private String email;
 
@@ -24,12 +22,15 @@ public class User extends BaseEntity {
 
     private LocalDateTime createUser;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
         this.createUser = LocalDateTime.now();
-
+        this.roles = new HashSet<>();
     }
 
     public String getUsername() {
@@ -39,22 +40,22 @@ public class User extends BaseEntity {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+//
+//    public String getFirstName() {
+//        return firstName;
+//    }
+//
+//    public void setFirstName(String firstName) {
+//        this.firstName = firstName;
+//    }
+//
+//    public String getLastName() {
+//        return lastName;
+//    }
+//
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
 
     public String getEmail() {
         return email;

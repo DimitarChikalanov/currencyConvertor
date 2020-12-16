@@ -2,7 +2,7 @@ package com.currency.convertor.domain.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 
-public enum Erole implements GrantedAuthority {
+public enum ERole implements GrantedAuthority {
 
     ROLE_ADMIN,
     ROLE_USER;
