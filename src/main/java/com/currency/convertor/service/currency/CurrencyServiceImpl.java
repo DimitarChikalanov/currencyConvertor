@@ -34,28 +34,33 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public BigDecimal convert(CurrencyRequestModel model, User user) {
-        CurrencyExchange currencyFrom = this.currencyRepository.findByNameOfValue(model.getExchangeFrom());
-        CurrencyExchange currencyTo = this.currencyRepository.findByNameOfValue(model.getExchangeTo());
-        double exchangeResult = (currencyTo.getRate().doubleValue() / (currencyFrom.getRate().doubleValue()) * (model.getSumExchange().doubleValue()));
-//        User us = this.userRepository.findByUsername(user.getUsername()).orElseThrow();
+    public BigDecimal convertAndSaveToHistory(CurrencyRequestModel model, User user) {
+        History history = new History();
+        history.setUser(user);
+        history.setCurrencyFrom(model.getExchangeFrom());
+        history.setCurrencyTo(model.getExchangeTo());
+        history.setCurrencyExchange(model.getSumExchange());
+        history.setExchangeSum(sumOfCurrency(model.getExchangeTo(), model.getExchangeFrom(), model.getSumExchange()));
+        this.historyRepository.saveAndFlush(history);
 
-        if (user.getId() != 0) {
-            History history = new History();
-            history.setUser(user);
-            history.setCurrencyFrom(model.getExchangeFrom());
-            history.setCurrencyTo(model.getExchangeTo());
-            history.setCurrencyExchange(model.getSumExchange());
-            history.setExchangeSum(new BigDecimal(exchangeResult).setScale(2, RoundingMode.HALF_UP));
-            this.historyRepository.saveAndFlush(history);
-        }
-
-        return new BigDecimal(exchangeResult).setScale(2, RoundingMode.HALF_UP);
+        return sumOfCurrency(model.getExchangeTo(), model.getExchangeFrom(), model.getSumExchange());
     }
 
     @Override
     public List getCurrencyRate() {
         return this.currencyRepository.findAll();
+    }
+
+    @Override
+    public BigDecimal convertCurrency(CurrencyRequestModel model) {
+        return sumOfCurrency(model.getExchangeTo(), model.getExchangeFrom(), model.getSumExchange());
+    }
+
+    private BigDecimal sumOfCurrency(String rateTo, String rateFrom, BigDecimal sum) {
+        CurrencyExchange currencyFrom = this.currencyRepository.findByNameOfValue(rateFrom);
+        CurrencyExchange currencyTo = this.currencyRepository.findByNameOfValue(rateTo);
+        double exchangeResult = (currencyTo.getRate().doubleValue() / (currencyFrom.getRate().doubleValue()) * (sum.doubleValue()));
+        return new BigDecimal(exchangeResult).setScale(2, RoundingMode.HALF_UP);
     }
 
     @PostConstruct

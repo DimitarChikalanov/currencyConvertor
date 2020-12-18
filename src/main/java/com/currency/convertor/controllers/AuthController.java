@@ -23,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -90,7 +88,6 @@ public class AuthController {
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
-
                 if (role.equals("admin")) {
                     Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -102,7 +99,7 @@ public class AuthController {
                 }
             });
         }
-        user.setRoles(roles);
+
         this.userRepository.saveAndFlush(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

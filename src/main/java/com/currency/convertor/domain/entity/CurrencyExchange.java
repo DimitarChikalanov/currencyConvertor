@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Table(name = "currency_to_dayes")
 public class CurrencyExchange extends BaseEntity{
 
+    @Column(unique = true)
     private String nameOfValue;
 
     private BigDecimal rate;

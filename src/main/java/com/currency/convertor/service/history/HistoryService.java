@@ -7,4 +7,6 @@ import java.util.List;
 public interface HistoryService {
 
     List getAllHistory(User user);
+
+    List getAllHistoryByFromData(User user, String time);
 }

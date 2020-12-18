@@ -25,11 +25,16 @@ public class CurrencyConverterController {
 
     @PostMapping("/change")
     public ResponseEntity<?> changeCurrency(@RequestBody CurrencyRequestModel model, @AuthenticationPrincipal User user) {
-        return new ResponseEntity<>(currencyService.convert(model,user), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(currencyService.convertAndSaveToHistory(model,user), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/currencies")
     public List getCurrency() {
         return this.currencyService.getCurrencyRate();
+    }
+
+    @PostMapping("/convert")
+    public ResponseEntity<?> convertCurrency(@RequestBody CurrencyRequestModel model) {
+        return new ResponseEntity<>(currencyService.convertCurrency(model), HttpStatus.ACCEPTED);
     }
 }

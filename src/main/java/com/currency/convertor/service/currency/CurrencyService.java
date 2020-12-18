@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface CurrencyService {
 
-    BigDecimal convert(CurrencyRequestModel model, User user);
+    BigDecimal convertAndSaveToHistory(CurrencyRequestModel model, User user);
 
     List getCurrencyRate();
+
+    BigDecimal convertCurrency(CurrencyRequestModel model);
 }
