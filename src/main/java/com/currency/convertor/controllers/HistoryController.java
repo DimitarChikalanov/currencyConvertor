@@ -2,6 +2,7 @@ package com.currency.convertor.controllers;
 
 import com.currency.convertor.domain.entity.User;
 import com.currency.convertor.service.history.HistoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +16,7 @@ public class HistoryController {
 
     private final HistoryService historyService;
 
+    @Autowired
     public HistoryController(HistoryService historyService) {
         this.historyService = historyService;
     }

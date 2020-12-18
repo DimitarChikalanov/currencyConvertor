@@ -1,4 +1,4 @@
-package com.currency.convertor.domain.model;
+package com.currency.convertor.domain.model.update;
 
 import java.math.BigDecimal;
 

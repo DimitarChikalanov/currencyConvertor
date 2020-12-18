@@ -19,8 +19,6 @@ public class JwtResponse {
         this.roles = roles;
     }
 
-
-
     public String getToken() {
         return token;
     }

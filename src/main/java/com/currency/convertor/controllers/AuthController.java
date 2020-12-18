@@ -11,6 +11,7 @@ import com.currency.convertor.security.payload.request.SignupRequest;
 import com.currency.convertor.security.payload.response.JwtResponse;
 import com.currency.convertor.security.payload.response.MessageResponse;
 import com.currency.convertor.security.user.UserDetailsImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,6 +37,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
 
+    @Autowired
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
@@ -99,7 +101,13 @@ public class AuthController {
                 }
             });
         }
-        user.setRoles(roles);
+
+        if (this.userRepository.count() == 0) {
+            Role role = this.roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow();
+            user.getRoles().add(role);
+        } else {
+            user.setRoles(roles);
+        }
         this.userRepository.saveAndFlush(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
