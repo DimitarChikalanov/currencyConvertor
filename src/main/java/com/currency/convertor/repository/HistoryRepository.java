@@ -16,5 +16,4 @@ public interface HistoryRepository extends JpaRepository<History,Long> {
 
     List<History> findAllByUserAndExchangedAt(User user, LocalDateTime time);
 
-
 }
