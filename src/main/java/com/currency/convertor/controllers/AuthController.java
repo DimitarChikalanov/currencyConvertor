@@ -99,7 +99,7 @@ public class AuthController {
                 }
             });
         }
-
+        user.setRoles(roles);
         this.userRepository.saveAndFlush(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
