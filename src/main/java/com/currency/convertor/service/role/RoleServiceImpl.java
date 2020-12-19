@@ -22,7 +22,7 @@ public class RoleServiceImpl implements RolesService {
     @Override
     @PostConstruct
     public void saveToDb() {
-       List<ERole> roles = new ArrayList<>();
+        List<ERole> roles = new ArrayList<>();
         if (this.roleRepository.count() == 0) {
             roles.add(ERole.ROLE_ADMIN);
             roles.add(ERole.ROLE_USER);

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-   private UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     @Transactional
@@ -23,7 +23,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return UserDetailsImpl.build(user);
     }
-
 
     @Transactional
     public User loadUser(String username) throws UsernameNotFoundException {
