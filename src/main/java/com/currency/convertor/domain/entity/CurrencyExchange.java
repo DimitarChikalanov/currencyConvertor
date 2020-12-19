@@ -15,6 +15,8 @@ public class CurrencyExchange extends BaseEntity{
 
     private LocalDate refreshTime;
 
+    public CurrencyExchange() { }
+
     public String getNameOfValue() {
         return nameOfValue;
     }
