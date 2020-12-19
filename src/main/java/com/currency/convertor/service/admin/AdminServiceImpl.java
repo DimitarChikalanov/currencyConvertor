@@ -3,7 +3,7 @@ package com.currency.convertor.service.admin;
 import com.currency.convertor.domain.entity.CurrencyExchange;
 import com.currency.convertor.domain.entity.ERole;
 import com.currency.convertor.domain.entity.User;
-import com.currency.convertor.domain.model.UpdateCurrencyModel;
+import com.currency.convertor.domain.model.update.UpdateCurrencyModel;
 import com.currency.convertor.repository.CurrencyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +21,7 @@ public class AdminServiceImpl implements AdminService {
     public AdminServiceImpl(CurrencyRepository currencyRepository) {
         this.currencyRepository = currencyRepository;
     }
+
 
     @Override
     public CurrencyExchange updateCurrency(UpdateCurrencyModel model, User user) {
@@ -48,4 +49,5 @@ public class AdminServiceImpl implements AdminService {
         this.currencyRepository.delete(currencyExchange);
         logger.info("successful deleted this currency = " + currencyName);
     }
+
 }
