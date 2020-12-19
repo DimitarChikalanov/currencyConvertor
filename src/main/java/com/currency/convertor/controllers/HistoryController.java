@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 @RequestMapping("/api/history")
 public class HistoryController {
 
@@ -24,7 +24,7 @@ public class HistoryController {
 
     @GetMapping("/all")
     public List getAllHistory (@AuthenticationPrincipal User user){
-      return   this.historyService.getAllHistory(user);
+        return   this.historyService.getAllHistory(user);
     }
 
     @PostMapping("/fromdata")

@@ -9,4 +9,5 @@ public interface AdminService {
     CurrencyExchange updateCurrency(UpdateCurrencyModel model, User user);
 
     void deletedCurrency(String currencyName, User user);
+
 }

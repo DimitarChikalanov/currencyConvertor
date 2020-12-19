@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 @RequestMapping("/api/admin")
 public class AdminController {
 
@@ -27,7 +27,7 @@ public class AdminController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> updateCurrency(UpdateCurrencyModel model, @AuthenticationPrincipal User user) {
+    public ResponseEntity<?> updateCurrency(@RequestBody UpdateCurrencyModel model, @AuthenticationPrincipal User user) {
         return new ResponseEntity<>(this.adminService.updateCurrency(model, user), HttpStatus.ACCEPTED);
     }
 

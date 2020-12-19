@@ -38,7 +38,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deletedCurrency(String currencyName, User user) {
-
         if (!user.getRoles().equals(ERole.ROLE_ADMIN)) {
             throw new IllegalArgumentException("have not rights");
         }
@@ -47,7 +46,6 @@ public class AdminServiceImpl implements AdminService {
             throw new IllegalArgumentException("have not contains this currency");
         }
         this.currencyRepository.delete(currencyExchange);
-
-        logger.info("successful deleted this currency = "+ currencyName);
+        logger.info("successful deleted this currency = " + currencyName);
     }
 }

@@ -28,7 +28,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 @RequestMapping("/api/auth")
 public class AuthController {
 
@@ -102,7 +102,6 @@ public class AuthController {
                 }
             });
         }
-        user.setRoles(roles);
 
         if (this.userRepository.count() == 0) {
             Role role = this.roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow();
