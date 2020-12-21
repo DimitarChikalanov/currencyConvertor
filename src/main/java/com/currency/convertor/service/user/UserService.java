@@ -13,5 +13,7 @@ public interface UserService {
 
     User updateEmail(UpdateEmailModel model,User user);
 
+    User getUserProfile(User user);
+
     User fetchByUsername(String name);
 }

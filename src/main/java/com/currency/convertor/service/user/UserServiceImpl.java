@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserProfile(User user) {
+        return fetchByUsername(user.getUsername());
+    }
+
+    @Override
     public User fetchByUsername(String name) {
         return this.userRepository.findByUsername(name).orElseThrow(() -> new IllegalArgumentException("User does not exist"));
     }

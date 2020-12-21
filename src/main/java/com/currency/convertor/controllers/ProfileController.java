@@ -41,4 +41,9 @@ public class ProfileController {
         this.userService.updateEmail(model, user);
         return ResponseEntity.ok(new MessageResponse("Successful change Email"));
     }
+
+    @GetMapping("/profile")
+    public User getUserProfile(@AuthenticationPrincipal User user){
+        return this.userService.getUserProfile(user);
+    }
 }
