@@ -13,8 +13,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("*")
-@RequestMapping("/api/profile")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/v1")
 public class ProfileController {
 
     private final UserService userService;
