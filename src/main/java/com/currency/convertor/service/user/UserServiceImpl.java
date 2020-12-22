@@ -1,8 +1,7 @@
 package com.currency.convertor.service.user;
 
 import com.currency.convertor.domain.entity.User;
-import com.currency.convertor.domain.model.update.UpdateEmailModel;
-import com.currency.convertor.domain.model.update.UpdatePasswordModel;
+import com.currency.convertor.domain.model.update.UpdateProfileModel;
 import com.currency.convertor.domain.model.update.UpdateUsernameModel;
 import com.currency.convertor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,24 +20,13 @@ public class UserServiceImpl implements UserService {
         this.encoder = encoder;
     }
 
-    @Override
-    public User updatePassword(UpdatePasswordModel model, User user) {
-        User updateUser = fetchByUsername(user.getUsername());
-        updateUser.setPassword(encoder.encode(model.getPassword()));
-        return this.userRepository.saveAndFlush(updateUser);
-    }
 
     @Override
-    public User updateUsername(UpdateUsernameModel model, User user) {
+    public User updateUserProfile(UpdateProfileModel model, User user) {
         User updateUser = fetchByUsername(user.getUsername());
         updateUser.setUsername(model.getUsername());
-        return this.userRepository.saveAndFlush(updateUser);
-    }
-
-    @Override
-    public User updateEmail(UpdateEmailModel model, User user) {
-        User updateUser = fetchByUsername(user.getUsername());
         updateUser.setEmail(model.getEmail());
+        updateUser.setPassword(encoder.encode(model.getPassword()));
         return this.userRepository.saveAndFlush(updateUser);
     }
 
