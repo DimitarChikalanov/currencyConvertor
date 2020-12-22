@@ -20,12 +20,12 @@ public class UserServiceImpl implements UserService {
         this.encoder = encoder;
     }
 
-
     @Override
     public User updateUserProfile(UpdateProfileModel model, User user) {
         User updateUser = fetchByUsername(user.getUsername());
-        updateUser.setUsername(model.getUsername());
         updateUser.setEmail(model.getEmail());
+        updateUser.setFirstName(model.getFirstName());
+        updateUser.setLastName(model.getLastName());
         updateUser.setPassword(encoder.encode(model.getPassword()));
         return this.userRepository.saveAndFlush(updateUser);
     }
