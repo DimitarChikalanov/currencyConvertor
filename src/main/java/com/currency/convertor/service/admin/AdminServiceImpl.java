@@ -25,14 +25,15 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public CurrencyExchange updateCurrency(UpdateCurrencyModel model, User user) {
-        if (!user.getRoles().equals(ERole.ROLE_ADMIN)) {
-            throw new IllegalArgumentException("have not rights");
-        }
+//        if (!user.getRoles().equals(ERole.ROLE_ADMIN)) {
+//            throw new IllegalArgumentException("have not rights");
+//        }
         if (model.getCurrencyName().length() < 3 && model.getCurrencyName().length() > 3) {
             throw new IllegalArgumentException("Currency name must be 3 length");
         }
         CurrencyExchange currencyExchange = new CurrencyExchange();
         currencyExchange.setNameOfValue(model.getCurrencyName());
+        currencyExchange.setRate(model.getRate());
         currencyExchange.setRefreshTime(LocalDate.now());
         return this.currencyRepository.saveAndFlush(currencyExchange);
     }
