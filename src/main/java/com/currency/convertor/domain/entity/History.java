@@ -1,7 +1,6 @@
 package com.currency.convertor.domain.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,15 +15,15 @@ public class History extends BaseEntity {
 
     private BigDecimal currencyExchange;
 
-    private BigDecimal ExchangeSum;
+    private BigDecimal sumExchange;
 
-    private LocalDateTime exchangedAt;
+    private LocalDate exchangedAt;
 
     @ManyToOne
-    private User user ;
+    private User user;
 
-    public  History () {
-        this.exchangedAt=LocalDateTime.now();
+    public History () {
+        this.exchangedAt = LocalDate.now();
     }
 
     public String getCurrencyFrom() {
@@ -52,18 +51,18 @@ public class History extends BaseEntity {
     }
 
     public BigDecimal getExchangeSum() {
-        return ExchangeSum;
+        return sumExchange;
     }
 
     public void setExchangeSum(BigDecimal exchangeSum) {
-        ExchangeSum = exchangeSum;
+        sumExchange = exchangeSum;
     }
 
-    public LocalDateTime getExchangedAt() {
+    public LocalDate getExchangedAt() {
         return exchangedAt;
     }
 
-    public void setExchangedAt(LocalDateTime exchangedAt) {
+    public void setExchangedAt(LocalDate exchangedAt) {
         this.exchangedAt = exchangedAt;
     }
 
